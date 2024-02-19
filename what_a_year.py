@@ -10,7 +10,7 @@ def custom_strftime(format, t):
     return t.strftime(format).replace('{S}', str(t.day) + get_daily_suffix(t.day))
 
 # creating a image object  
-image = Image.open(r'./image.png')  
+image = Image.open('./image.png')  
   
 draw = ImageDraw.Draw(image)  
 
