@@ -18,6 +18,6 @@ draw = ImageDraw.Draw(image)
 font = ImageFont.truetype(rf'{os.getcwd()}/fonts/arial_bd.ttf', 19) 
   
 # drawing text size 
-draw.text((205, 143), text=custom_strftime('%B {S}', dt.now()), font = font, fill="#090A0F", align ="left")  
+draw.text((205, 143), text=custom_strftime('%B {S}', dt.now()), font = font, fill="#E04747", align ="left")  
   
 image.save("./current_year.png") 
