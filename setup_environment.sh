@@ -1,18 +1,26 @@
-sudo echo "[Unit]
-Description=My Script Description
-After=network.target
+ALIAS_NAME="update_wallpaper"
+TARGET_FILE="$HOME/.bashrc"
 
-[Service]
-Type=oneshot
-ExecStart=$(pwd)/set_wallpaper.sh
+if [ -d ~/.oh-my-zsh ]; then
+    TARGET_FILE="$HOME/.zshrc"
+fi
 
-[Install]
-WantedBy=multi-user.target" >> /etc/systemd/system/wallpaper_tintin.service
+# Check if the command exists
+if grep -q "$ALIAS_NAME" $TARGET_FILE; then
+    echo "Command '$ALIAS_NAME' already exists."
+    exit
+fi
 
-chmod +x $(pwd)/set_wallpaper.sh
-chmod +x $(pwd)/image.png
-chmod +x $(pwd)/what_a_year.py
+APP_NAME=what-a-year-captain
+echo "update_wallpaper() {
+	if [ ! -d "$HOME/what-a-year-captain" ]; then
+		mkdir $HOME/$APP_NAME
+		git clone https://github.com/RodrigoEC/$APP_NAME.git $HOME/$APP_NAME
+    fi
 
-sudo systemctl daemon-reload
-sudo systemctl enable wallpaper_tintin.service
-sudo systemctl start wallpaper_tintin.service
+	cd "$HOME/$APP_NAME"
+    git pull origin main
+
+	python3 what_a_year.py
+}" >> $TARGET_FILE
+

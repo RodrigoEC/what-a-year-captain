@@ -20,7 +20,7 @@ font = ImageFont.truetype(rf'{os.getcwd()}/fonts/arial_bd.ttf', 19)
 # drawing text size 
 draw.text((205, 143), text=custom_strftime('%B {S}', dt.now()), font = font, fill="#E04747", align ="left")  
   
-image.save("./current_year.png")
+image.save("./current_date.png")
 
-os.system(f"gsettings set org.gnome.desktop.background picture-uri-dark {os.getcwd()}/current_year.png")
-os.system(f"gsettings set org.gnome.desktop.background picture-uri {os.getcwd()}/current_year.png")
+os.system(f"gsettings set org.gnome.desktop.background picture-uri-dark {os.getcwd()}/current_date.png")
+os.system(f"gsettings set org.gnome.desktop.background picture-uri {os.getcwd()}/current_date.png")
