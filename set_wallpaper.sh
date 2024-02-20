@@ -1,7 +1,8 @@
 APP_NAME=what-a-year-captain
 CURRENT_PATH=$(pwd)
 
-cd "$HOME/$APP_NAME"
+cd $HOME/$APP_NAME
+
 git pull origin main
 
 python3 what_a_year.py

@@ -1,16 +1,23 @@
 APP_NAME=what-a-year-captain
+PROJECT_PATH=$HOME/$APP_NAME
+
 create_crontab() {
-    echo "0 13 * * * $HOME/$APP_NAME/set_wallpaper.sh" >> /tmp/crontab.tmp
+    echo "15 13 * * * $PROJECT_PATH/set_wallpaper.sh" >> /tmp/crontab.tmp
 
     # Install the new crontab file
     crontab /tmp/crontab.tmp
 
+    echo "Cronjob scheduled: $(crontab -l)"
+    
     # Remove temporary file
     rm /tmp/crontab.tmp
 }
 
 create_crontab
-if [ ! -d "$HOME/what-a-year-captain" ]; then
-    mkdir $HOME/$APP_NAME
-    git clone https://github.com/RodrigoEC/$APP_NAME.git $HOME/$APP_NAME
+if [ ! -d "$PROJECT_PATH" ]; then
+    mkdir $PROJECT_PATH
+    git clone https://github.com/RodrigoEC/$APP_NAME.git $PROJECT_PATH
+
+    echo "$APP_NAME repository created at $PROJECT_PATH"
+
 fi
