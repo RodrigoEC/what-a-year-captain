@@ -1,13 +1,34 @@
-APP_NAME=what-a-year-captain
+#!/bin/bash
+
 CURRENT_PATH=$(pwd)
 
-cd $HOME/$APP_NAME
+cd $1
 
-git pull origin main
+echo "$(date +%F_%T) - Running set_wallpaper script" >> $1/set_wallpaper.log
 
-python3 what_a_year.py
+python3 $1/what_a_year.py
 
-gsettings set org.gnome.desktop.background picture-uri-dark $(pwd)/current_date.png
-gsettings set org.gnome.desktop.background picture-uri $(pwd)/current_date.png
+echo "$(date +%F_%T) - Running what_a_year script" >> $1/set_wallpaper.log
+
+# gsettings set org.gnome.desktop.background picture-uri $1/current_date.png
+# # Check if the command executed successfully
+# if [ $? -eq 0 ]; then
+#     echo "$(date +%F_%T) - Successful! gsettings set org.gnome.desktop.background picture-uri" >> $1/set_wallpaper.log
+# else
+#     echo "$(date +%F_%T) - Gone wrong! gsettings set org.gnome.desktop.background picture-uri" >> $1/set_wallpaper.log
+# fi
+
+gsettings set org.gnome.desktop.background picture-uri-dark $1/current_date.png
+
+# Check if the command executed successfully
+if [ $? -eq 0 ]; then
+    echo "$(date +%F_%T) - Successful! gsettings set org.gnome.desktop.background picture-uri-dark" >> $1/set_wallpaper.log
+else
+    echo "$(date +%F_%T) - Gone wrong! gsettings set org.gnome.desktop.background picture-uri-dark" >> $1/set_wallpaper.log
+fi
+
+
+
+echo "$(date +%F_%T) - Setting background" >> $1/set_wallpaper.log
 
 cd $CURRENT_PATH
